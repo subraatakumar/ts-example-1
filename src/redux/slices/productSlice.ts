@@ -17,21 +17,21 @@ type ProductType = {
 };
 
 type InitialStateType = {
-  data: ProductType[];
+  datas: ProductType[];
   loading: boolean;
   error: string;
 };
 
-const fetchProducts = createAsyncThunk<ProductType[]>(
+export const fetchProducts = createAsyncThunk<ProductType[]>(
   "products/fetchProducts",
   async () => {
-    const response = await axios.get("https://fakestoreapi.com/products");
+    const response = await axios.get("https://fakestoreapi.com/pducts");
     return response.data;
   }
 );
 
 const initialState: InitialStateType = {
-  data: [],
+  datas: [],
   loading: false,
   error: "",
 };
@@ -43,20 +43,20 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
-        state.data = [];
+        state.datas = [];
         state.loading = true;
         state.error = "";
       })
       .addCase(
         fetchProducts.fulfilled,
         (state, action: PayloadAction<ProductType[]>) => {
-          state.data = action.payload;
+          state.datas = action.payload;
           state.loading = false;
           state.error = "";
         }
       )
       .addCase(fetchProducts.rejected, (state) => {
-        state.data = [];
+        state.datas = [];
         state.loading = false;
         state.error = "Something went wrong.";
       });
