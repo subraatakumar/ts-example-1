@@ -21,13 +21,15 @@ type InitialStateType = {
   error: string;
 };
 
+const initialState: InitialStateType = {
+  data: [],
+  loading: false,
+  error: "",
+};
+
 const productSlice = createSlice({
   name: "product",
-  initialState: {
-    data: [],
-    loading: false,
-    error: "",
-  },
+  initialState,
   reducers: {},
   extraReducers: () => {},
 });
